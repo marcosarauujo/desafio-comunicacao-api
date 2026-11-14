@@ -13,6 +13,7 @@ import com.luizalebs.comunicacao_api.infraestructure.repositories.ComunicacaoRep
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -23,6 +24,8 @@ public class ComunicacaoService {
     private final ComunicacaoRepository repository;
     private final ComunicacaoMapper mapper;
     private final NotificacaoClient client;
+
+    private final Clock clock;
 
     public ComunicacaoOutDTO agendarComunicacao(ComunicacaoInDTO dto) {
         if (Objects.isNull(dto)) {
@@ -65,7 +68,7 @@ public class ComunicacaoService {
                 .emailUsuario(entity.getEmailDestinatario())
                 .nomeTarefa("Notificação: " + entity.getNomeDestinatario())
                 .descricao(entity.getMensagem())
-                .dataEvento(LocalDateTime.now())
+                .dataEvento(LocalDateTime.now(clock))
                 .build();
         try {
             client.enviarEmail(tarefasDTO);
