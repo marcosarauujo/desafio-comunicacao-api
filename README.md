@@ -26,6 +26,14 @@
 Com a aplicação em execução, acesse a documentação interativa dos endpoints em:
 `http://localhost:8080/swagger-ui/index.html`
 
+🧪 Testes Automatizados
+
+O projeto conta com uma suíte abrangente de testes unitários cobrindo todas as camadas da aplicação:
+
+Camada de Mapper (ComunicacaoMapperTest): Validação bidirecional das conversões entre Entity e DTOs via MapStruct.
+Camada de Negócio (ComunicacaoServiceTest): 10 testes cobrindo todos os fluxos de sucesso e cenários de exceção (BusinessException, ResourceNotFoundException), com simulação de falhas de banco de dados, falhas de API externa e desacoplamento de relógio via injeção de Clock para testes determinísticos.
+Camada Web (ComunicacaoControllerTest): Validação de rotas, códigos de status HTTP (200, 400 Bad Request) e serialização JSON utilizando MockMvc em modo standalone.
+
 
 ## 🐳 Como Rodar com Docker
 
